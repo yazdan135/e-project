@@ -247,15 +247,6 @@ include("./header.php");
 
         </div>
 
-        <div class="form-group">
-
-          <label for="inputEmail3" class="col-form-label">Sub Category Image :</label>
-          <strong><?php echo $rows['sub_category_image'] ?></strong>
-          <input type="file" name="sub_image" class="form-control mb-3" id="inputEmail3">
-
-        </div>
-
-
         <button type="submit" name="submit" class="btn btn-primary mb-3">Update Sub Category</button>
       </form>
     </div>
@@ -273,23 +264,14 @@ include("./header.php");
   if (isset($_POST['submit'])) {
     $main = $_POST['m_c_id'];
     $sub = $_POST['sub'];
-    $sub_image = $_FILES['sub_image']['name'];
 
 
 
-    $sql = "update sub_cateory set main_category_id_FK = '$main', sub_category_name = '$sub', sub_category_image = '$sub_image' where id = '$Id'";
+    $sql = "update sub_cateory set main_category_id_FK = '$main', sub_category_name = '$sub', where id = '$Id'";
 
     $result = mysqli_query($con, $sql);
 
 
-    if (isset($_FILES)) {
-      $file_name = $_FILES['sub_image']['name'];
-      $file_size = $_FILES['sub_image']['size'];
-      $file_type = $_FILES['sub_image']['type'];
-      $file_tmp = $_FILES['sub_image']['tmp_name'];
-
-      move_uploaded_file($file_tmp, "img/sub-category/" . $file_name);
-    }
 
     echo "<script>
     alert('Category Updated Successfully');

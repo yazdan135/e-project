@@ -1,10 +1,7 @@
 <?php
 include("./connection.php");
 include("./header.php");
-$sql = "select sub_cateory .* ,  main_category.main_category_name from sub_cateory inner join main_category on main_category.id = sub_cateory.main_category_id_FK";
-$result = mysqli_query($con, $sql);
 ?>
-
 <div id="content-wrapper" class="d-flex flex-column">
     <div id="content">
         <!-- TopBar -->
@@ -179,88 +176,75 @@ $result = mysqli_query($con, $sql);
                 </li>
             </ul>
         </nav>
-              <!-- Modal Logout -->
-      <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Are you sure you want to logout?</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
-              <a href="login.php" class="btn btn-primary">Logout</a>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-
-
-        <div class="col-lg-11 mx-auto">
-            <div class="bg-light rounded h-100 p-4">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Sub Category Table :</h6>
-                        </div>
-                        <div class="col-lg-4 card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <a href="./sub_category_add.php">
-                                <h6 class="m-0 font-weight-bold text-success">Add Another Sub Category</h6>
-                            </a>
-                        </div>
+        <!-- Topbar -->
+        <!-- Modal Logout -->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabelLogout" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabelLogout">Ohh No!</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Are you sure you want to logout?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-primary" data-dismiss="modal">Cancel</button>
+                        <a href="login.php" class="btn btn-primary">Logout</a>
                     </div>
                 </div>
-                <div class="table-responsive table-bordered text-center text-dark e1">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Main Category</th>
-                                <th scope="col">Sub Category</th>
-                                <th scope="col">Action</th>
+            </div>
+        </div>
 
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <?php
-                                while ($rows = mysqli_fetch_assoc($result)) {
-                                ?>
-
-                                    <td><?php echo $rows['id'] ?></td>
-                                    <td><?php echo $rows['main_category_name'] ?></td>
-                                    <td><?php echo $rows['sub_category_name'] ?></td>
-                                    <td><a href="sub_category_update.php?id=<?php echo $rows['id'] ?>">
-                                            <script src="https://cdn.lordicon.com/lordicon.js"></script>
-                                            <lord-icon src="https://cdn.lordicon.com/qzlhsleu.json" trigger="hover" style="width:30px;height:30px">
-                                            </lord-icon>
-                                            <a href="sub_category_delete.php?id=<?php echo $rows['id'] ?>">
-                                                <script src="https://cdn.lordicon.com/lordicon.js"></script>
-                                                <lord-icon src="https://cdn.lordicon.com/wpyrrmcq.json" trigger="hover" style="width:30px;height:30px">
-                                                </lord-icon></td>
-
-                            </tr>
-                        <?php  } ?>
-                        </tbody>
-                    </table>
+        <div class="card mb-4 mx-auto col-lg-8">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Update Order Form :</h6>
+                    </div>
+                    <div class="col-lg-4 card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <a href="./view_order.php">
+                            <h6 class="m-0 font-weight-bold text-success">Not To Update</h6>
+                        </a>
+                    </div>
                 </div>
             </div>
+            <form action="" method="post">
+
+                <div class="form-group mt-4">
+                    <label for="orderupdate" class="col-form-label">Order Update:</label>
+                    <select id="inputState" name="b_id" class="form-control">
+                            <option value="0">Pending</option>
+                            <option value="1">Packed</option>
+                            <option value="2">Out for Delivery</option>
+                            <option value="3">Delivered</option>
+                            <option value="4">Cancelled</option>
+                    </select>
+                </div>
+                <div><button type="submit"  name="submit" class="btn btn-primary h-75 m-2">Update Status</button></div>
+            </form>
         </div>
     </div>
 
 
+
+
     <?php
+
+      if (isset($_POST['submit'])) {
+        $order  = $_POST['status'];
+
+    $sql = "insert into order (status) values ('$order')";
+    $result = mysqli_query($conn, $sql);
+        echo "<script>
+        alert('Order Status Updated Successfully');
+        window.location.href='view_ordre.php'
+        </script>";
+      }
+
+
     include("./footer.php");
     ?>

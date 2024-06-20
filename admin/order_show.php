@@ -214,11 +214,6 @@ $result = mysqli_query($con, $sql);
                         <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-primary">Order Table :</h6>
                         </div>
-                        <div class="col-lg-4 card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <a href="./view_order.php">
-                                <h6 class="m-0 font-weight-bold text-success">View Order</h6>
-                            </a>
-                        </div>
                     </div>
                 </div>
                 <div class="table-responsive table-bordered text-center text-dark e1">
@@ -246,9 +241,9 @@ $result = mysqli_query($con, $sql);
                                     <td><?php echo $rows['name'] ?></td>
                                     <td><?php echo $rows['amount'] ?></td>
                                     <td><?php if ($rows['paid'] == 0) : ?>
-                                            <span class="badge badge-light border px-2 rounded-pill">No</span>
+                                        <span class="badge badge-light border px-2 rounded-pill">No Paid</span>
                                         <?php else : ?>
-                                            <span class="badge badge-success px-2 rounded-pill">Yes</span>
+                                            <span class="badge badge-success px-2 rounded-pill">Paid</span>
                                         <?php endif; ?>
                                     </td>
                                     <td><?php if ($rows['status'] == 0) : ?>
@@ -265,7 +260,14 @@ $result = mysqli_query($con, $sql);
                                     </td>
 
 
-                                    <td><a href="order_delete.php?id=<?php echo $rows['id'] ?>">
+                                    <td><a href="view_order.php?id=<?php echo $rows['id'] ?>">
+                                            <script src="https://cdn.lordicon.com/lordicon.js"></script>
+                                            <lord-icon
+                                                    src="https://cdn.lordicon.com/eouimtlu.json"
+                                                    trigger="hover"
+                                                    style="width:30px;height:30px">
+                                            </lord-icon>
+                                        <a href="order_delete.php?id=<?php echo $rows['id'] ?>">
                                             <script src="https://cdn.lordicon.com/lordicon.js"></script>
                                             <lord-icon src="https://cdn.lordicon.com/wpyrrmcq.json" trigger="hover" style="width:30px;height:30px">
                                             </lord-icon>

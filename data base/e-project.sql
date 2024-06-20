@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 12, 2024 at 02:56 PM
+-- Generation Time: Jun 20, 2024 at 11:02 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.1.25
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,6 +32,13 @@ CREATE TABLE `brand` (
   `brand_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`id`, `brand_name`) VALUES
+(6, 'lux');
+
 -- --------------------------------------------------------
 
 --
@@ -54,7 +61,7 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `role_id_FK`, `name`, `email`, `password`, `address`, `contact`, `dob`) VALUES
-(4, 15, 'muhammadyazdan375@gmail.com', 'muhammadyazdan375@gmail.com', '123', 'nazimabad', '03122718700', '1212-12-12');
+(4, 15, 'muzamil', 'muz@gmail.com', '7867878', 'kharadar karachi', '+92-321-2131184', '1986-09-02');
 
 -- --------------------------------------------------------
 
@@ -66,6 +73,14 @@ CREATE TABLE `main_category` (
   `id` int(11) NOT NULL,
   `main_category_name` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `main_category`
+--
+
+INSERT INTO `main_category` (`id`, `main_category_name`) VALUES
+(4, 'Cosmetics'),
+(5, 'Jewellery');
 
 -- --------------------------------------------------------
 
@@ -82,16 +97,9 @@ CREATE TABLE `order` (
   `amount` int(20) NOT NULL,
   `status` varchar(255) NOT NULL COMMENT '	0 = pending, 1= Packed, 2 = Out for Delivery, 3=Delivered, 4=cancelled',
   `paid` varchar(100) NOT NULL,
-  `date_create` date NOT NULL DEFAULT current_timestamp(),
+  `date_create` datetime NOT NULL DEFAULT current_timestamp(),
   `date_update` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `order`
---
-
-INSERT INTO `order` (`id`, `client_id_FK`, `delivery_address`, `payment_method`, `order_type`, `amount`, `status`, `paid`, `date_create`, `date_update`) VALUES
-(9, 4, '154-A', '', 0, 15000, '<br />\r\n<b>Warning</b>:  Trying to access array offset on value of type null in <b>C:UsersmuhamOneDriveDesktopprojectadminorder_add.php</b> on line <b>272</b><br />\r\n', '15000', '1212-12-12', '1212-12-12');
 
 -- --------------------------------------------------------
 
@@ -104,8 +112,8 @@ CREATE TABLE `order_list` (
   `order_id_FK` int(30) NOT NULL,
   `product_id_FK` int(30) NOT NULL,
   `quantity` int(30) NOT NULL,
-  `price` int(30) NOT NULL,
-  `total` int(30) NOT NULL
+  `price` double NOT NULL,
+  `total` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -156,6 +164,14 @@ CREATE TABLE `sub_cateory` (
   `sub_category_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `sub_cateory`
+--
+
+INSERT INTO `sub_cateory` (`id`, `main_category_id_FK`, `sub_category_name`, `sub_category_image`) VALUES
+(6, 5, 'EARINGS', ''),
+(7, 5, 'Rings', '');
+
 -- --------------------------------------------------------
 
 --
@@ -176,26 +192,6 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `role_id_FK`, `username`, `email`, `password`) VALUES
 (7, 14, 'Rizwan', 'admin@gmail.com', 'Admin');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`email`, `password`) VALUES
-('muhammadyazdan375@gmail.com', '123'),
-('sufyan@gmail.com', '123'),
-('anas@gmail.com', '123');
 
 --
 -- Indexes for dumped tables
@@ -231,6 +227,7 @@ ALTER TABLE `order`
 -- Indexes for table `order_list`
 --
 ALTER TABLE `order_list`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `order_id_FK` (`order_id_FK`),
   ADD KEY `product_id_FK` (`product_id_FK`);
 
@@ -270,31 +267,37 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `main_category`
 --
 ALTER TABLE `main_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `order`
 --
 ALTER TABLE `order`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `order_list`
+--
+ALTER TABLE `order_list`
+  MODIFY `id` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -306,13 +309,13 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `sub_cateory`
 --
 ALTER TABLE `sub_cateory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- Constraints for dumped tables

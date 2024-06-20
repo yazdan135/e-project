@@ -1,8 +1,6 @@
 <?php
 include("./connection.php");
 include("./header.php");
-$sql = "select `order` .* ,  `client`.`name` from `order` inner join `client` on `client`.`id` = `order`.`client_id_FK`";
-$result = mysqli_query($con, $sql);
 ?>
 
 <div id="content-wrapper" class="d-flex flex-column">
@@ -199,14 +197,6 @@ $result = mysqli_query($con, $sql);
                 </div>
             </div>
         </div>
-
-
-
-
-
-
-
-
         <div class="col-lg-11 mx-auto">
             <div class="bg-light rounded h-100 p-4">
                 <div class="container">
@@ -214,6 +204,10 @@ $result = mysqli_query($con, $sql);
                         <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-Dark">Client Name :
                                 <?php
+
+                                $sql = "select `order` .* ,  `client`.`name` from `order` inner join `client` on `client`.`id` = `order`.`client_id_FK`";
+                                $result = mysqli_query($con, $sql);
+
                                 while ($rows = mysqli_fetch_assoc($result)) {
                                 ?>
                                     <?php echo $rows['name'] ?></h6>
@@ -221,16 +215,46 @@ $result = mysqli_query($con, $sql);
                         <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
                             <h6 class="m-0 font-weight-bold text-Dark">Delivery Address :
                                 <?php echo $rows['delivery_address'] ?></h6>
-                        
+
                         </div><br>
                         <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary">Order Table :</h6>
-                        </div>
-                        <div class="col-lg-4 card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <a href="./order_show.php">
-                                <h6 class="m-0 font-weight-bold text-success">Order Show</h6>
-                            </a>
-                        </div>
+                            <h6 class="m-0 font-weight-bold text-Dark">Payment Method :
+                                <?php
+                                    echo $rows['payment_method'] ?>
+                                </h6>
+                            <h6 class="m-0 font-weight-bold text-Dark">Order Status :
+                                <?php if ($rows['status'] == 0) : ?>
+                                    <span class="badge badge-light border px-3 rounded-pill">Pending</span>
+                                <?php elseif ($rows['status'] == 1) : ?>
+                                    <span class="badge badge-primary px-3 rounded-pill">Packed</span>
+                                <?php elseif ($rows['status'] == 2) : ?>
+                                    <span class="badge badge-warning px-3 rounded-pill">Out for Delivery</span>
+                                <?php elseif ($rows['status'] == 3) : ?>
+                                    <span class="badge badge-success px-3 rounded-pill">Delivered</span>
+                                <?php else : ?>
+                                    <span class="badge badge-danger px-3 rounded-pill">Cancelled</span>
+                                <?php endif; ?>
+                            </h6>
+                        </div><br>
+                        <div><a href="./update_status.php"><button type="submit" name="submit" class="btn btn-primary h-75 m-2">Update Status</button></a></div>
+                        <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-Dark">Payment Status :
+                                <?php
+                                    if ($rows['paid'] == 0) : ?>
+                                    <span class="badge badge-light border px-2 rounded-pill">No Paid</span>
+                                <?php else : ?>
+                                    <span class="badge badge-success px-2 rounded-pill">Paid</span>
+                                <?php endif; ?>
+                        </div><br>
+                    <?php  } ?>
+                    <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Order Table :</h6>
+                    </div>
+                    <div class="col-lg-4 card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                        <a href="./order_show.php">
+                            <h6 class="m-0 font-weight-bold text-success">Order Show</h6>
+                        </a>
+                    </div>
                     </div>
                 </div>
                 <div class="table-responsive table-bordered text-center text-dark e1">
@@ -238,7 +262,7 @@ $result = mysqli_query($con, $sql);
                         <thead>
                             <tr>
 
-                                <th scope="col">Qty</th>
+                                <th scope="col">Qty </th>
                                 <th scope="col">Product</th>
                                 <th scope="col">Price</th>
                                 <th scope="col">Total</th>
@@ -279,15 +303,6 @@ $result = mysqli_query($con, $sql);
                         <?php  } ?>
                         </tbody>
                     </table>
-                    <div class="col-lg-8 card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-Dark">Payment Method :
-                                <?php  
-                                while ($rows = mysqli_fetch_assoc($result)) {
-                                ?>
-                                    <?php echo $rows['payment_method'] ?></h6>
-                        </div><br>
-                        <?php  } ?>
-                        <?php  } ?>
                 </div>
             </div>
         </div>
