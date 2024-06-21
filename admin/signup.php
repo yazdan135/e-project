@@ -34,14 +34,8 @@ include("./connection.php");
                     <h1 class="h4 text-gray-900 mb-4">Register</h1>
                   </div>
                   <form method="POST">
-                  <div class="form-group">
-                      <label>Role Name</label>
-                      <input type="text" name="username" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Your Name">
-                    </div>
-                  <div class="form-group">
-                      <label>Name</label>
-                      <input type="text" name="username" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Your Name">
-                    </div>
+                 
+              
                     <div class="form-group">
                       <label>Email</label>
                       <input type="email" name="email" class="form-control" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address">
