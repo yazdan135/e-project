@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 20, 2024 at 11:02 AM
+-- Generation Time: Jun 21, 2024 at 10:45 AM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.1.25
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -37,7 +37,12 @@ CREATE TABLE `brand` (
 --
 
 INSERT INTO `brand` (`id`, `brand_name`) VALUES
-(6, 'lux');
+(7, 'st London'),
+(8, 'missrose'),
+(9, 'sana zara'),
+(10, 'Vogue world'),
+(11, 'tiffany and co'),
+(12, 'tesoro');
 
 -- --------------------------------------------------------
 
@@ -61,7 +66,12 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id`, `role_id_FK`, `name`, `email`, `password`, `address`, `contact`, `dob`) VALUES
-(4, 15, 'muzamil', 'muz@gmail.com', '7867878', 'kharadar karachi', '+92-321-2131184', '1986-09-02');
+(7, 18, 'ayaan', 'ayaan@gmail.com', '123', 'nazimabad', '03122741670', '2009-12-12'),
+(8, 18, 'anas', 'anas@gmail.com', '123', 'saima arabian villas', '03122718700', '2005-12-12'),
+(9, 18, 'sufyan', 'sufyan@gmail.com', '123', 'gulsan', '03122741670', '2009-12-12'),
+(10, 18, 'hadi', 'hadi@gmail.com', '123', 'malir', '03122718700', '2013-12-12'),
+(11, 18, 'mustafa', 'mustafa@gmail.com', '123', 'landhi', '03122741670', '1222-12-12'),
+(12, 18, 'mujtaba', 'mujtaba@gmail.com', '123', 'five star', '03122718700', '1212-12-12');
 
 -- --------------------------------------------------------
 
@@ -79,8 +89,8 @@ CREATE TABLE `main_category` (
 --
 
 INSERT INTO `main_category` (`id`, `main_category_name`) VALUES
-(4, 'Cosmetics'),
-(5, 'Jewellery');
+(4, 'Cosmetic'),
+(6, 'jewellery');
 
 -- --------------------------------------------------------
 
@@ -132,6 +142,52 @@ CREATE TABLE `product` (
   `product_image` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`id`, `brand_id_FK`, `sub_category_id_FK`, `product_name`, `description`, `price`, `product_image`) VALUES
+(6, 7, 10, 'lipstick', 'Creamy color with flattering pigments in a lip-loving, comfortable formula', 1499, 'Creamy color with flattering pigments in a lip-loving, comfortable formula(lipstick).webp'),
+(7, 7, 10, 'lipstick', 'Creamy color with flattering pigments in a lip-loving, comfortable formula', 1499, 'lipstick(2).webp'),
+(8, 7, 10, 'lipstick', 'Creamy color with flattering pigments in a lip-loving, comfortable formula', 1499, 'lipstick(3).webp'),
+(9, 7, 10, 'lipstick', 'Creamy color with flattering pigments in a lip-loving, comfortable formula', 1499, 'lipstick(4).webp'),
+(10, 8, 10, 'foundation', 'Kryolan - TV Paint Stick', 1999, 'Kryolan - TV Paint Stick(foundation 1).webp'),
+(11, 8, 10, 'foundation', 'Kryolan - TV Paint Stick', 1999, '(foundation 2).webp'),
+(12, 8, 10, 'foundation', 'Kryolan - TV Paint Stick', 1999, 'foundation (3).webp'),
+(13, 8, 10, 'foundation', 'Kryolan - TV Paint Stick', 1999, 'foundation (4).webp'),
+(14, 7, 10, 'lipstick (liquid)', 'Velvet Reign Matte Liquid Lipstick', 1299, 'Velvet Reign Matte Liquid Lipstick(liquid lipstick 1).webp'),
+(15, 7, 10, 'lipstick (liquid)', 'Velvet Reign Matte Liquid Lipstick', 1299, 'liquid lipstick (2).webp'),
+(16, 8, 10, 'lipstick (liquid)', 'Velvet Reign Matte Liquid Lipstick', 1299, 'liquid lipstick (3).webp'),
+(17, 8, 10, 'lipstick (liquid)', 'Velvet Reign Matte Liquid Lipstick', 1299, 'lipstick(4).webp'),
+(18, 9, 11, 'serum', 'MULTI-ACTION NIGHT REPAIR FACE SERUM - 30 ML ', 2999, 'MULTI-ACTION NIGHT REPAIR FACE SERUM - 30 ML (serum 1).webp'),
+(19, 9, 11, 'serum', 'MULTI-ACTION NIGHT REPAIR FACE SERUM - 30 ML ', 2999, 'serum (2).webp'),
+(20, 9, 11, 'serum', 'MULTI-ACTION NIGHT REPAIR FACE SERUM - 30 ML ', 2999, 'serum (4).webp'),
+(21, 9, 11, 'serum', 'MULTI-ACTION NIGHT REPAIR FACE SERUM - 30 ML ', 2999, 'serum(3).webp'),
+(22, 9, 11, 'blush', 'BEAUTY BLUSH PERSIAN PLUM-30ML', 2499, 'BEAUTY BLUSH PERSIAN PLUM-30ML (blush 1).webp'),
+(23, 9, 11, 'blush', 'BEAUTY BLUSH PERSIAN PLUM-30ML', 2499, 'blush (2).webp'),
+(24, 9, 11, 'blush', 'BEAUTY BLUSH PERSIAN PLUM-30ML', 2499, 'blush (3).webp'),
+(25, 9, 11, 'blush', 'BEAUTY BLUSH PERSIAN PLUM-30ML', 2499, 'blush (4).webp'),
+(26, 10, 12, 'braclet', 'golden  24k (5 tola)', 6000000, 'bracelet 1.jpg'),
+(27, 10, 12, 'braclet', 'golden  24k (3 tola)', 4000000, 'bracelet 3.jpeg'),
+(28, 10, 12, 'braclet', 'silver braclet', 2000000, 'bracelet 2.jpeg'),
+(29, 10, 12, 'braclet', 'silver braclet', 3000000, 'bracelet 4.jpeg'),
+(30, 11, 12, 'ring', 'golden ring 24k (2 tola)', 4000000, 'ring 4.jpg'),
+(31, 11, 12, 'ring', 'silver ring with daimond', 10000000, 'ring 3.jpeg'),
+(32, 11, 12, 'ring', 'silver ring', 1000000, 'ring 2.jpeg'),
+(33, 11, 12, 'ring', 'silver ring with nayab stone', 1200000, 'ring 1.jpeg'),
+(34, 12, 13, 'necklace', 'golden necklace 24k (10 tola)', 1500000, 'necklace 2.jpeg'),
+(35, 12, 13, 'necklace', 'golden necklace 24k (7 tola)', 1000000, 'necklace 4.jpeg'),
+(36, 12, 13, 'necklace', 'daimond necklace pure (72 small daimond)', 100000000, 'necklace 1.jpeg'),
+(37, 12, 13, 'necklace', 'silver necklace pure (20 nayab stone)', 120000, 'necklace 3.jpeg'),
+(38, 12, 13, 'pendant', 'pendant with etasco desing duck', 80000, 'pendant 1.jpg'),
+(39, 12, 13, 'pendant', 'pendant with etasco pure daimond', 800000, 'pendant 2.jpg'),
+(40, 12, 13, 'pendant', 'pendant with etasco pure nayab stone', 200000, 'pendant 3.jpeg'),
+(41, 12, 13, 'pendant', 'pendant with etasco pure nayab duck', 20000, 'pendant 4.jpg'),
+(42, 12, 13, 'earing', 'earing with pure daimond ', 3000000, 'ear ring 2.jpg'),
+(43, 12, 13, 'earing', 'earing with pure nayab daimond', 300000, 'ear ring 1.jpg'),
+(44, 12, 13, 'earing', 'earing with pure nayab red stone', 300000, 'ear ring 3jpeg.jpeg'),
+(45, 12, 13, 'earing', 'earing with pure nayab vogue stone', 300000, 'ear ring 4.jpg');
+
 -- --------------------------------------------------------
 
 --
@@ -148,8 +204,8 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`id`, `role_name`) VALUES
-(14, 'Admin'),
-(15, 'Client');
+(17, 'admin'),
+(18, 'client');
 
 -- --------------------------------------------------------
 
@@ -169,8 +225,10 @@ CREATE TABLE `sub_cateory` (
 --
 
 INSERT INTO `sub_cateory` (`id`, `main_category_id_FK`, `sub_category_name`, `sub_category_image`) VALUES
-(6, 5, 'EARINGS', ''),
-(7, 5, 'Rings', '');
+(10, 4, 'makup', ''),
+(11, 4, 'skin care', ''),
+(12, 6, 'wareable', ''),
+(13, 6, 'hangable', '');
 
 -- --------------------------------------------------------
 
@@ -191,7 +249,26 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `role_id_FK`, `username`, `email`, `password`) VALUES
-(7, 14, 'Rizwan', 'admin@gmail.com', 'Admin');
+(10, 17, 'muhammad yazdan', 'muhammadyazdan375@gmail.com', '123'),
+(11, 17, 'rizwan khan', 'rizwan@gmail.com', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `email` int(255) NOT NULL,
+  `password` int(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`email`, `password`) VALUES
+(0, 123);
 
 --
 -- Indexes for dumped tables
@@ -267,19 +344,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `client`
 --
 ALTER TABLE `client`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `main_category`
 --
 ALTER TABLE `main_category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `order`
@@ -297,25 +374,25 @@ ALTER TABLE `order_list`
 -- AUTO_INCREMENT for table `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
 
 --
 -- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `sub_cateory`
 --
 ALTER TABLE `sub_cateory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
